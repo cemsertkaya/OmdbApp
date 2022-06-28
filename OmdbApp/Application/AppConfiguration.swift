@@ -14,6 +14,7 @@ final class AppConfiguration
         guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "ApiKey") as? String else {
             fatalError("ApiKey must not be empty in plist")
         }
+        return apiKey
     }()
     
     lazy var apiBaseURL: String = {

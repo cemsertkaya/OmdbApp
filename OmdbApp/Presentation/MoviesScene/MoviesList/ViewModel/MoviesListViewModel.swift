@@ -1,26 +1,50 @@
 //
-//  MovieListViewModel.swift
+//  MoviesListViewModel.swift
 //  OmdbApp
 //
-//  Created by Cem Sertkaya on 28.06.2022.
+//  Created by Cem Sertkaya on 27.06.2022.
 //
 
 import Foundation
-import UIKit
 
 struct MoviesListViewModelActions {
-    /// Note: if you would need to edit movie inside Details screen and update this Movies List screen with updated movie then you would need this closure:
+    
     /// showMovieDetails: (Movie, @escaping (_ updated: Movie) -> Void) -> Void
     let showMovieDetails: (Movie) -> Void
-    let showMovieQueriesSuggestions: (@escaping (_ didSelect: MovieQuery) -> Void) -> Void
-    let closeMovieQueriesSuggestions: () -> Void
 }
 
-class MoviesListViewModel : MoviesListViewModelInput, MoviesListViewModelOutput
-{
+enum MoviesListViewModelLoading {
+    case fullScreen
+    case nextPage
+}
+
+protocol MoviesListViewModelInput {
+    func viewDidLoad()
+    func didLoadNextPage()
+    func didSearch(query: String)
+    func didCancelSearch()
+    func didSelectItem(at index: Int)
+}
+
+protocol MoviesListViewModelOutput {
+    var items: Observable<[MoviesListItemViewModel]> { get } /// Also we can calculate view model items on demand:  https://github.com/kudoleh/iOS-Clean-Architecture-MVVM/pull/10/files
+    var loading: Observable<MoviesListViewModelLoading?> { get }
+    var query: Observable<String> { get }
+    var error: Observable<String> { get }
+    var isEmpty: Bool { get }
+    var screenTitle: String { get }
+    var emptyDataTitle: String { get }
+    var errorTitle: String { get }
+    var searchBarPlaceholder: String { get }
+}
+
+protocol MoviesListViewModel: MoviesListViewModelInput, MoviesListViewModelOutput {}
+
+final class DefaultMoviesListViewModel: MoviesListViewModel {
+
     private let searchMoviesUseCase: SearchMoviesUseCase
     private let actions: MoviesListViewModelActions?
-    
+
     var currentPage: Int = 0
     var totalPageCount: Int = 1
     var hasMorePages: Bool { currentPage < totalPageCount }
@@ -30,8 +54,9 @@ class MoviesListViewModel : MoviesListViewModelInput, MoviesListViewModelOutput
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
 
     // MARK: - OUTPUT
+
     let items: Observable<[MoviesListItemViewModel]> = Observable([])
-    //let loading: Observable<MoviesListViewModelLoading?> = Observable(.none)
+    let loading: Observable<MoviesListViewModelLoading?> = Observable(.none)
     let query: Observable<String> = Observable("")
     let error: Observable<String> = Observable("")
     var isEmpty: Bool { return items.value.isEmpty }
@@ -39,19 +64,18 @@ class MoviesListViewModel : MoviesListViewModelInput, MoviesListViewModelOutput
     let emptyDataTitle = NSLocalizedString("Search results", comment: "")
     let errorTitle = NSLocalizedString("Error", comment: "")
     let searchBarPlaceholder = NSLocalizedString("Search Movies", comment: "")
-    var selectedIndex: Int
-    
+
     // MARK: - Init
-    init(searchMoviesUseCase: SearchMoviesUseCase,actions: MoviesListViewModelActions? = nil)
-    {
+
+    init(searchMoviesUseCase: SearchMoviesUseCase,
+         actions: MoviesListViewModelActions? = nil) {
         self.searchMoviesUseCase = searchMoviesUseCase
         self.actions = actions
-        selectedIndex = 0
     }
-    
+
     // MARK: - Private
-    private func appendPage(_ moviesPage: MoviesPage)
-    {
+
+    private func appendPage(_ moviesPage: MoviesPage) {
         currentPage = moviesPage.page
         totalPageCount = moviesPage.totalPages
 
@@ -59,7 +83,7 @@ class MoviesListViewModel : MoviesListViewModelInput, MoviesListViewModelOutput
             .filter { $0.page != moviesPage.page }
             + [moviesPage]
 
-        //items.value = pages.movies.map(MoviesListItemViewModel.init)
+        items.value = pages.movies.map(MoviesListItemViewModel.init)
     }
 
     private func resetPages() {
@@ -69,16 +93,6 @@ class MoviesListViewModel : MoviesListViewModelInput, MoviesListViewModelOutput
         items.value.removeAll()
     }
 
-    private func getMoviesListItemViewModel() -> MoviesListItemViewModel {return items.value[selectedIndex]}
-    
-    func viewDidLoad() {
-        
-    }
-    
-    func didSearch(query: String) {
-        
-    }
-    /*
     private func load(movieQuery: MovieQuery, loading: MoviesListViewModelLoading) {
         self.loading.value = loading
         query.value = movieQuery.query
@@ -106,35 +120,39 @@ class MoviesListViewModel : MoviesListViewModelInput, MoviesListViewModelOutput
     private func update(movieQuery: MovieQuery) {
         resetPages()
         load(movieQuery: movieQuery, loading: .fullScreen)
-    }*/
-    
-    func numberOfRows(_ section: Int) -> Int {return self.items.value.count}
-        
-    func modelAt(_ index: Int, tableView : UITableView) -> MoviesListItemViewModel {return self.items.value[index]}
-    
-    func getMovieViewModel() -> MoviesListItemViewModel {return self.items.value[selectedIndex]}
-    
-    func didSelectItem(at : Int)
-    {
-        self.selectedIndex = at
-        //self.performSegue(withIdentifier: "toDetails", sender: self)
     }
 }
 
+// MARK: - INPUT. View event methods
 
-protocol MoviesListViewModelInput
-{
-    func viewDidLoad()
-    func didSearch(query: String)
-    func didSelectItem(at index: Int)
+extension DefaultMoviesListViewModel {
+
+    func viewDidLoad() { }
+
+    func didLoadNextPage() {
+        guard hasMorePages, loading.value == .none else { return }
+        load(movieQuery: .init(query: query.value),
+             loading: .nextPage)
+    }
+
+    func didSearch(query: String) {
+        guard !query.isEmpty else { return }
+        update(movieQuery: MovieQuery(query: query))
+    }
+
+    func didCancelSearch() {
+        moviesLoadTask?.cancel()
+    }
+
+
+    func didSelectItem(at index: Int) {
+        actions?.showMovieDetails(pages.movies[index])
+    }
 }
 
-protocol MoviesListViewModelOutput
-{
-    var items: Observable<[MoviesListItemViewModel]> { get }
-    //var loading: Observable<MoviesListViewModelLoading?> { get }
-    //var query: Observable<String> { get }
-    //var error: Observable<String> { get }
-    var errorTitle: String { get }
-    var selectedIndex : Int {get}
+// MARK: - Private
+
+private extension Array where Element == MoviesPage {
+    var movies: [Movie] { flatMap { $0.movies } }
 }
+

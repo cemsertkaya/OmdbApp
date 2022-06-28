@@ -10,7 +10,7 @@ import UIKit
 
 protocol MoviesSearchFlowCoordinatorDependencies
 {
-    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController
+    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> SearchController
     func makeMoviesDetailsViewController(movie: Movie) -> UIViewController
 }
 
@@ -30,7 +30,7 @@ final class MoviesSearchFlowCoordinator {
     
     func start()
     {
-        let actions = MoviesListViewModelActions(showMovieDetails: showMovieDetails,showMovieQueriesSuggestions: showMovieQueriesSuggestions,closeMovieQueriesSuggestions: closeMovieQueriesSuggestions)
+        let actions = MoviesListViewModelActions(showMovieDetails: showMovieDetails)
 
         let vc = dependencies.makeMoviesListViewController(actions: actions)
 

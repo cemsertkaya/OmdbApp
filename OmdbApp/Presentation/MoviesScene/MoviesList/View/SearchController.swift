@@ -7,13 +7,13 @@
 
 import UIKit
 
-class SearchController: UIViewController
+class SearchController: UIViewController, Alertable
 {
     @IBOutlet weak var searchTextField: FormTextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     
-    private let viewModel = MoviesListViewModel!
+    private var viewModel : MoviesListViewModel!
    
     
     override func viewDidLoad()
@@ -26,7 +26,7 @@ class SearchController: UIViewController
     
     @IBAction func searchButton(_ sender: Any)
     {
-        
+
     }
     
     private func bind(to viewModel: MoviesListViewModel)
@@ -39,7 +39,7 @@ class SearchController: UIViewController
         if segue.identifier == String(describing: DetailViewController.self),
         let destinationVC = segue.destination as? DetailViewController
         {
-            destinationVC.viewModel = viewModel.
+            //destinationVC.viewModel = viewModel
         }
     }
     
@@ -47,17 +47,19 @@ class SearchController: UIViewController
 
 extension SearchController: UITableViewDelegate, UITableViewDataSource
 {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {viewModel.numberOfRows(section)}
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{return viewModel.items.value.count}
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
-        cell.configure(viewModel.modelAt(indexPath.row, tableView: tableView))
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell",for: indexPath) as? TableViewCell
+        else
+        {
+            assertionFailure("Cannot dequeue reusable cell \(TableViewCell.self) with reuseIdentifier: tableViewCell")
+            return UITableViewCell()
+        }
+        //cell.configure(viewModel.modelAt(indexPath.row, tableView: tableView))
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        
-    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {viewModel.didSelectItem(at: indexPath.row)}
 }
