@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E906BCC2869F846008F40E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BCB2869F846008F40E3 /* AppDelegate.swift */; };
 		4E906BCE2869F846008F40E3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BCD2869F846008F40E3 /* SceneDelegate.swift */; };
-		4E906BD02869F846008F40E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BCF2869F846008F40E3 /* ViewController.swift */; };
+		4E906BD02869F846008F40E3 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BCF2869F846008F40E3 /* SearchController.swift */; };
 		4E906BD32869F846008F40E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E906BD12869F846008F40E3 /* Main.storyboard */; };
 		4E906BD62869F846008F40E3 /* OmdbApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BD42869F846008F40E3 /* OmdbApp.xcdatamodeld */; };
 		4E906BD82869F84A008F40E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E906BD72869F84A008F40E3 /* Assets.xcassets */; };
@@ -17,6 +17,7 @@
 		4E906BE62869F84B008F40E3 /* OmdbAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BE52869F84B008F40E3 /* OmdbAppTests.swift */; };
 		4E906BF02869F84B008F40E3 /* OmdbAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BEF2869F84B008F40E3 /* OmdbAppUITests.swift */; };
 		4E906BF22869F84B008F40E3 /* OmdbAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BF12869F84B008F40E3 /* OmdbAppUITestsLaunchTests.swift */; };
+		4E906BFF2869F8D4008F40E3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BFE2869F8D4008F40E3 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +41,7 @@
 		4E906BC82869F846008F40E3 /* OmdbApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmdbApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E906BCB2869F846008F40E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E906BCD2869F846008F40E3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4E906BCF2869F846008F40E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4E906BCF2869F846008F40E3 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		4E906BD22869F846008F40E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4E906BD52869F846008F40E3 /* OmdbApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OmdbApp.xcdatamodel; sourceTree = "<group>"; };
 		4E906BD72869F84A008F40E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +52,7 @@
 		4E906BEB2869F84B008F40E3 /* OmdbAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmdbAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E906BEF2869F84B008F40E3 /* OmdbAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbAppUITests.swift; sourceTree = "<group>"; };
 		4E906BF12869F84B008F40E3 /* OmdbAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4E906BFE2869F8D4008F40E3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +105,8 @@
 			children = (
 				4E906BCB2869F846008F40E3 /* AppDelegate.swift */,
 				4E906BCD2869F846008F40E3 /* SceneDelegate.swift */,
-				4E906BCF2869F846008F40E3 /* ViewController.swift */,
+				4E906BCF2869F846008F40E3 /* SearchController.swift */,
+				4E906BFE2869F8D4008F40E3 /* DetailViewController.swift */,
 				4E906BD12869F846008F40E3 /* Main.storyboard */,
 				4E906BD72869F84A008F40E3 /* Assets.xcassets */,
 				4E906BD92869F84A008F40E3 /* LaunchScreen.storyboard */,
@@ -261,8 +264,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E906BD02869F846008F40E3 /* ViewController.swift in Sources */,
+				4E906BD02869F846008F40E3 /* SearchController.swift in Sources */,
 				4E906BCC2869F846008F40E3 /* AppDelegate.swift in Sources */,
+				4E906BFF2869F8D4008F40E3 /* DetailViewController.swift in Sources */,
 				4E906BCE2869F846008F40E3 /* SceneDelegate.swift in Sources */,
 				4E906BD62869F846008F40E3 /* OmdbApp.xcdatamodeld in Sources */,
 			);
