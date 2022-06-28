@@ -44,12 +44,10 @@
 		4EAEADF7286B77500099C72A /* UIViewController+AddChild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEADEB286B77500099C72A /* UIViewController+AddChild.swift */; };
 		4EAEADF8286B77500099C72A /* DataTransferError+ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEADEC286B77500099C72A /* DataTransferError+ConnectionError.swift */; };
 		4EAEADF9286B77500099C72A /* UIViewController+AddBehaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEADED286B77500099C72A /* UIViewController+AddBehaviors.swift */; };
-		4EAEADFA286B77500099C72A /* UIViewController+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEADEE286B77500099C72A /* UIViewController+ActivityIndicator.swift */; };
 		4EAEADFB286B77500099C72A /* UIImageView+ImageSizeAfterAspectFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEADEF286B77500099C72A /* UIImageView+ImageSizeAfterAspectFit.swift */; };
 		4EAEADFC286B77500099C72A /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEADF0286B77500099C72A /* Observable.swift */; };
 		4EAEADFD286B77500099C72A /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEADF2286B77500099C72A /* Alertable.swift */; };
 		4EAEADFE286B77500099C72A /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEADF3286B77500099C72A /* StoryboardInstantiable.swift */; };
-		4EAEADFF286B77500099C72A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEADF4286B77500099C72A /* LoadingView.swift */; };
 		4EAEAE01286B79410099C72A /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEAE00286B79410099C72A /* APIEndpoints.swift */; };
 		4EAEAE04286B79BC0099C72A /* MoviesRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEAE03286B79BC0099C72A /* MoviesRequestDTO.swift */; };
 		4EAEAE06286B7A040099C72A /* MoviesResponseDTO+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAEAE05286B7A040099C72A /* MoviesResponseDTO+.swift */; };
@@ -116,12 +114,10 @@
 		4EAEADEB286B77500099C72A /* UIViewController+AddChild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AddChild.swift"; sourceTree = "<group>"; };
 		4EAEADEC286B77500099C72A /* DataTransferError+ConnectionError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataTransferError+ConnectionError.swift"; sourceTree = "<group>"; };
 		4EAEADED286B77500099C72A /* UIViewController+AddBehaviors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AddBehaviors.swift"; sourceTree = "<group>"; };
-		4EAEADEE286B77500099C72A /* UIViewController+ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		4EAEADEF286B77500099C72A /* UIImageView+ImageSizeAfterAspectFit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageSizeAfterAspectFit.swift"; sourceTree = "<group>"; };
 		4EAEADF0286B77500099C72A /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		4EAEADF2286B77500099C72A /* Alertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		4EAEADF3286B77500099C72A /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
-		4EAEADF4286B77500099C72A /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		4EAEAE00286B79410099C72A /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		4EAEAE03286B79BC0099C72A /* MoviesRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRequestDTO.swift; sourceTree = "<group>"; };
 		4EAEAE05286B7A040099C72A /* MoviesResponseDTO+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesResponseDTO+.swift"; sourceTree = "<group>"; };
@@ -407,7 +403,6 @@
 				4EAEADE9286B77500099C72A /* Extensions */,
 				4EAEADF1286B77500099C72A /* Protocols */,
 				4EAEADE8286B77500099C72A /* AccessibilityIdentifier.swift */,
-				4EAEADF4286B77500099C72A /* LoadingView.swift */,
 				4EAEADF0286B77500099C72A /* Observable.swift */,
 			);
 			path = Utils;
@@ -420,7 +415,6 @@
 				4EAEADEB286B77500099C72A /* UIViewController+AddChild.swift */,
 				4EAEADEC286B77500099C72A /* DataTransferError+ConnectionError.swift */,
 				4EAEADED286B77500099C72A /* UIViewController+AddBehaviors.swift */,
-				4EAEADEE286B77500099C72A /* UIViewController+ActivityIndicator.swift */,
 				4EAEADEF286B77500099C72A /* UIImageView+ImageSizeAfterAspectFit.swift */,
 			);
 			path = Extensions;
@@ -596,14 +590,12 @@
 				4EAEAE04286B79BC0099C72A /* MoviesRequestDTO.swift in Sources */,
 				4EAEADC0286B6F810099C72A /* DataTransferService.swift in Sources */,
 				4EAEADC2286B6FBD0099C72A /* NetworkService.swift in Sources */,
-				4EAEADFA286B77500099C72A /* UIViewController+ActivityIndicator.swift in Sources */,
 				4E906BCC2869F846008F40E3 /* AppDelegate.swift in Sources */,
 				4EAEADE6286B76730099C72A /* MoviesSearchFlowCoordinator.swift in Sources */,
 				4EAEADBB286B6E040099C72A /* AppConfiguration.swift in Sources */,
 				4EAEAE0F286B7CA90099C72A /* RepositoryTask.swift in Sources */,
 				4E906BFF2869F8D4008F40E3 /* DetailViewController.swift in Sources */,
 				4EAEADDA286B71570099C72A /* PosterImageRepository.swift in Sources */,
-				4EAEADFF286B77500099C72A /* LoadingView.swift in Sources */,
 				4EAEADF7286B77500099C72A /* UIViewController+AddChild.swift in Sources */,
 				4EAEADC4286B6FD20099C72A /* Endpoint.swift in Sources */,
 				4EAEADFD286B77500099C72A /* Alertable.swift in Sources */,

@@ -36,11 +36,12 @@ class SearchController: UIViewController, Alertable
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
+        /*
         if segue.identifier == String(describing: DetailViewController.self),
         let destinationVC = segue.destination as? DetailViewController
         {
             //destinationVC.viewModel = viewModel
-        }
+        }*/
     }
     
 }

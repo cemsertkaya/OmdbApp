@@ -7,27 +7,27 @@
 
 import Foundation
 
-struct MoviesListViewModelActions {
-    
-    /// showMovieDetails: (Movie, @escaping (_ updated: Movie) -> Void) -> Void
+struct MoviesListViewModelActions
+{
     let showMovieDetails: (Movie) -> Void
 }
 
-enum MoviesListViewModelLoading {
+enum MoviesListViewModelLoading
+{
     case fullScreen
     case nextPage
 }
 
-protocol MoviesListViewModelInput {
+protocol MoviesListViewModelInput
+{
     func viewDidLoad()
-    func didLoadNextPage()
     func didSearch(query: String)
     func didCancelSearch()
     func didSelectItem(at index: Int)
 }
 
 protocol MoviesListViewModelOutput {
-    var items: Observable<[MoviesListItemViewModel]> { get } /// Also we can calculate view model items on demand:  https://github.com/kudoleh/iOS-Clean-Architecture-MVVM/pull/10/files
+    var items: Observable<[MoviesListItemViewModel]> { get } 
     var loading: Observable<MoviesListViewModelLoading?> { get }
     var query: Observable<String> { get }
     var error: Observable<String> { get }
@@ -44,11 +44,6 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 
     private let searchMoviesUseCase: SearchMoviesUseCase
     private let actions: MoviesListViewModelActions?
-
-    var currentPage: Int = 0
-    var totalPageCount: Int = 1
-    var hasMorePages: Bool { currentPage < totalPageCount }
-    var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage }
 
     private var pages: [MoviesPage] = []
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
@@ -75,29 +70,11 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 
     // MARK: - Private
 
-    private func appendPage(_ moviesPage: MoviesPage) {
-        currentPage = moviesPage.page
-        totalPageCount = moviesPage.totalPages
-
-        pages = pages
-            .filter { $0.page != moviesPage.page }
-            + [moviesPage]
-
-        items.value = pages.movies.map(MoviesListItemViewModel.init)
-    }
-
-    private func resetPages() {
-        currentPage = 0
-        totalPageCount = 1
-        pages.removeAll()
-        items.value.removeAll()
-    }
-
     private func load(movieQuery: MovieQuery, loading: MoviesListViewModelLoading) {
         self.loading.value = loading
         query.value = movieQuery.query
 
-        moviesLoadTask = searchMoviesUseCase.execute(
+        /*moviesLoadTask = searchMoviesUseCase.execute(
             requestValue: .init(query: movieQuery, page: nextPage),
             cached: appendPage,
             completion: { result in
@@ -108,7 +85,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
                     self.handle(error: error)
                 }
                 self.loading.value = .none
-        })
+        })*/
     }
 
     private func handle(error: Error) {
@@ -118,41 +95,32 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     }
 
     private func update(movieQuery: MovieQuery) {
-        resetPages()
         load(movieQuery: movieQuery, loading: .fullScreen)
     }
 }
 
 // MARK: - INPUT. View event methods
 
-extension DefaultMoviesListViewModel {
+extension DefaultMoviesListViewModel
+{
 
     func viewDidLoad() { }
 
-    func didLoadNextPage() {
-        guard hasMorePages, loading.value == .none else { return }
-        load(movieQuery: .init(query: query.value),
-             loading: .nextPage)
-    }
-
-    func didSearch(query: String) {
+    func didSearch(query: String)
+    {
         guard !query.isEmpty else { return }
         update(movieQuery: MovieQuery(query: query))
     }
 
-    func didCancelSearch() {
-        moviesLoadTask?.cancel()
-    }
+    func didCancelSearch() {moviesLoadTask?.cancel()}
 
-
-    func didSelectItem(at index: Int) {
-        actions?.showMovieDetails(pages.movies[index])
-    }
+    func didSelectItem(at index: Int) {actions?.showMovieDetails(pages.movies[index])}
 }
 
 // MARK: - Private
 
-private extension Array where Element == MoviesPage {
+private extension Array where Element == MoviesPage
+{
     var movies: [Movie] { flatMap { $0.movies } }
 }
 
