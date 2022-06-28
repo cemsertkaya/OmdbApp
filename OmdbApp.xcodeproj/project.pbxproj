@@ -18,6 +18,12 @@
 		4E906BF02869F84B008F40E3 /* OmdbAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BEF2869F84B008F40E3 /* OmdbAppUITests.swift */; };
 		4E906BF22869F84B008F40E3 /* OmdbAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BF12869F84B008F40E3 /* OmdbAppUITestsLaunchTests.swift */; };
 		4E906BFF2869F8D4008F40E3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E906BFE2869F8D4008F40E3 /* DetailViewController.swift */; };
+		4E99D443286B1A0300042C84 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E99D442286B1A0300042C84 /* FormTextField.swift */; };
+		4E99D446286B215300042C84 /* FormButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E99D445286B215300042C84 /* FormButton.swift */; };
+		4E99D44A286B21DF00042C84 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E99D449286B21DF00042C84 /* Movie.swift */; };
+		4E99D44C286B27BC00042C84 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E99D44B286B27BC00042C84 /* MovieViewModel.swift */; };
+		4E99D44E286B27CC00042C84 /* MoviesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E99D44D286B27CC00042C84 /* MoviesListViewModel.swift */; };
+		4E99D450286B2CEB00042C84 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E99D44F286B2CEB00042C84 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +59,12 @@
 		4E906BEF2869F84B008F40E3 /* OmdbAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbAppUITests.swift; sourceTree = "<group>"; };
 		4E906BF12869F84B008F40E3 /* OmdbAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4E906BFE2869F8D4008F40E3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		4E99D442286B1A0300042C84 /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
+		4E99D445286B215300042C84 /* FormButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButton.swift; sourceTree = "<group>"; };
+		4E99D449286B21DF00042C84 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		4E99D44B286B27BC00042C84 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
+		4E99D44D286B27CC00042C84 /* MoviesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModel.swift; sourceTree = "<group>"; };
+		4E99D44F286B2CEB00042C84 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,15 +115,12 @@
 		4E906BCA2869F846008F40E3 /* OmdbApp */ = {
 			isa = PBXGroup;
 			children = (
-				4E906BCB2869F846008F40E3 /* AppDelegate.swift */,
-				4E906BCD2869F846008F40E3 /* SceneDelegate.swift */,
-				4E906BCF2869F846008F40E3 /* SearchController.swift */,
-				4E906BFE2869F8D4008F40E3 /* DetailViewController.swift */,
-				4E906BD12869F846008F40E3 /* Main.storyboard */,
-				4E906BD72869F84A008F40E3 /* Assets.xcassets */,
-				4E906BD92869F84A008F40E3 /* LaunchScreen.storyboard */,
-				4E906BDC2869F84A008F40E3 /* Info.plist */,
-				4E906BD42869F846008F40E3 /* OmdbApp.xcdatamodeld */,
+				4E99D447286B216E00042C84 /* Model */,
+				4E99D444286B213200042C84 /* View */,
+				4E99D448286B217600042C84 /* ViewModel */,
+				4E99D454286B33D700042C84 /* Data */,
+				4E99D494286B380F00042C84 /* Resources */,
+				4E99D493286B37E000042C84 /* Application */,
 			);
 			path = OmdbApp;
 			sourceTree = "<group>";
@@ -131,6 +140,71 @@
 				4E906BF12869F84B008F40E3 /* OmdbAppUITestsLaunchTests.swift */,
 			);
 			path = OmdbAppUITests;
+			sourceTree = "<group>";
+		};
+		4E99D441286B19E400042C84 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				4E906BD12869F846008F40E3 /* Main.storyboard */,
+				4E99D442286B1A0300042C84 /* FormTextField.swift */,
+				4E99D445286B215300042C84 /* FormButton.swift */,
+				4E99D44F286B2CEB00042C84 /* TableViewCell.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		4E99D444286B213200042C84 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4E99D441286B19E400042C84 /* UI */,
+				4E906BCF2869F846008F40E3 /* SearchController.swift */,
+				4E906BFE2869F8D4008F40E3 /* DetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4E99D447286B216E00042C84 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4E99D449286B21DF00042C84 /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4E99D448286B217600042C84 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4E99D44B286B27BC00042C84 /* MovieViewModel.swift */,
+				4E99D44D286B27CC00042C84 /* MoviesListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4E99D454286B33D700042C84 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4E99D493286B37E000042C84 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4E906BCB2869F846008F40E3 /* AppDelegate.swift */,
+				4E906BCD2869F846008F40E3 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		4E99D494286B380F00042C84 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4E906BD72869F84A008F40E3 /* Assets.xcassets */,
+				4E906BD92869F84A008F40E3 /* LaunchScreen.storyboard */,
+				4E906BDC2869F84A008F40E3 /* Info.plist */,
+				4E906BD42869F846008F40E3 /* OmdbApp.xcdatamodeld */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,11 +338,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E99D44A286B21DF00042C84 /* Movie.swift in Sources */,
+				4E99D446286B215300042C84 /* FormButton.swift in Sources */,
 				4E906BD02869F846008F40E3 /* SearchController.swift in Sources */,
 				4E906BCC2869F846008F40E3 /* AppDelegate.swift in Sources */,
 				4E906BFF2869F8D4008F40E3 /* DetailViewController.swift in Sources */,
+				4E99D44C286B27BC00042C84 /* MovieViewModel.swift in Sources */,
+				4E99D450286B2CEB00042C84 /* TableViewCell.swift in Sources */,
+				4E99D443286B1A0300042C84 /* FormTextField.swift in Sources */,
 				4E906BCE2869F846008F40E3 /* SceneDelegate.swift in Sources */,
 				4E906BD62869F846008F40E3 /* OmdbApp.xcdatamodeld in Sources */,
+				4E99D44E286B27CC00042C84 /* MoviesListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,9 +525,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9V2RQL28S6;
+				DEVELOPMENT_TEAM = FX48YA4D8H;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OmdbApp/Info.plist;
+				INFOPLIST_FILE = OmdbApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -473,9 +553,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9V2RQL28S6;
+				DEVELOPMENT_TEAM = FX48YA4D8H;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OmdbApp/Info.plist;
+				INFOPLIST_FILE = OmdbApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
