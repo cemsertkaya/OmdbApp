@@ -259,10 +259,10 @@
 				4E6BAC90286C821000F4E7BD /* Common */,
 				4EAEADCA286B70400099C72A /* Presentation */,
 				4EAEADD1286B710A0099C72A /* Domain */,
-				4E99D494286B380F00042C84 /* Resources */,
 				4E6BAC9F286C827100F4E7BD /* Infrastructure */,
 				4E6BAC53286C81D400F4E7BD /* Data */,
 				4E99D493286B37E000042C84 /* Application */,
+				4E99D494286B380F00042C84 /* Resources */,
 			);
 			path = OmdbApp;
 			sourceTree = "<group>";
