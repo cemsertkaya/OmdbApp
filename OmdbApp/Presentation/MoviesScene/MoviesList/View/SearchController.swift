@@ -12,9 +12,14 @@ class SearchController: UIViewController, Alertable, UITextFieldDelegate, Storyb
     @IBOutlet weak var searchTextField: FormTextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
+    
     private var viewModel : MoviesListViewModel!
-   
-    static func create(with viewModel: MoviesListViewModel) -> SearchController
+    private var posterImagesRepository: PosterImagesRepository?
+    
+    
+    // MARK: - Lifecycle
+    
+    static func create(with viewModel: MoviesListViewModel,posterImagesRepository: PosterImagesRepository?) -> SearchController
     {
         let view = SearchController.instantiateViewController()
         view.viewModel = viewModel
@@ -24,12 +29,13 @@ class SearchController: UIViewController, Alertable, UITextFieldDelegate, Storyb
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        UITextView.appearance().backgroundColor = UIColor.white;
+        UITextView.appearance().backgroundColor = UIColor.systemGray5;
         UITableView.appearance().backgroundColor = UIColor.white;
         searchTextField.delegate = self
-        tableView.estimatedRowHeight = 149
+        tableView.estimatedRowHeight = 169
         tableView.delegate = self
         tableView.dataSource = self
+        bind(to: viewModel)
     }
     
     private func bind(to viewModel : MoviesListViewModel){
@@ -44,7 +50,12 @@ class SearchController: UIViewController, Alertable, UITextFieldDelegate, Storyb
         showAlert(title: viewModel.errorTitle, message: error)
     }
     
-    @IBAction func searchButton(_ sender: Any) {viewModel.didSearch(query: searchTextField.text!)}
+    
+    
+    @IBAction func searchButton(_ sender: Any)
+    {        viewModel.didSearch(query: searchTextField.text!)
+        view.endEditing(true)
+    }
 }
 
 extension SearchController: UITableViewDelegate, UITableViewDataSource
@@ -59,7 +70,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource
             assertionFailure("Cannot dequeue reusable cell \(TableViewCell.self) with reuseIdentifier: tableViewCell")
             return UITableViewCell()
         }
-        cell.configure(viewModel.items.value[indexPath.row])
+        cell.configure(viewModel.items.value[indexPath.row], posterImagesRepository: posterImagesRepository)
         return cell
     }
     

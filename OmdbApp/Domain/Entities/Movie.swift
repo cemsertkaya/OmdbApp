@@ -7,45 +7,44 @@
 
 import Foundation
 
-/*
+
 // MARK: - Movie
-struct MoviesPage {
-    let search: [Movie]
-    let totalResults, response: String
+struct MoviesPage : Decodable {
+    let movies: [Movie]?
+    let totalResults, response: String?
+    
+    private enum CodingKeys: String, CodingKey
+    {
+       case movies = "Search"
+       case totalResults = "totalResults"
+       case response = "Response"
+    
+    }
 }
 
 // MARK: - Search
-struct Movie {
-    let title, year, imdbID: String
-    let type: MovieType
-    let poster: String
+struct Movie : Decodable {
+    
+    let title, year, imdbID : String?
+    let type: MovieType?
+    let poster: String?
+    
+    private enum CodingKeys: String, CodingKey
+    {
+       case type = "Type"
+       case title = "Title"
+       case year =  "Year"
+       case poster = "Poster"
+       case imdbID
+     }
 }
 
-enum MovieType {
+enum MovieType : String, Decodable {
     case game
     case movie
     case series
 }
 
 
-*/
 
-struct Movie: Equatable, Identifiable {
-    typealias Identifier = String
-    enum Genre {
-        case adventure
-        case scienceFiction
-    }
-    let id: Identifier
-    let title: String?
-    let genre: Genre?
-    let posterPath: String?
-    let overview: String?
-    let releaseDate: Date?
-}
 
-struct MoviesPage: Equatable {
-    let page: Int
-    let totalPages: Int
-    let movies: [Movie]
-}

@@ -12,7 +12,7 @@ final class MoviesSceneDIContainer {
     
     struct Dependencies {
         let apiDataTransferService: DataTransferService
-        
+        let imageDataTransferService: DataTransferService
     }
     
     private let dependencies: Dependencies
@@ -42,12 +42,13 @@ final class MoviesSceneDIContainer {
     
     func makeMoviesQueriesRepository() -> MoviesQueriesRepository {return DefaultMoviesQueriesRepository(dataTransferService: dependencies.apiDataTransferService)}
     
+    func makePosterImagesRepository() -> PosterImagesRepository {return DefaultPosterImagesRepository(dataTransferService: dependencies.imageDataTransferService)}
     
     
     // MARK: - Movies List
     func makeMoviesListViewController(actions: MoviesListViewModelActions) -> SearchController
     {
-        return SearchController.create(with: makeMoviesListViewModel(actions: actions))
+        return SearchController.create(with: makeMoviesListViewModel(actions: actions), posterImagesRepository: makePosterImagesRepository())
     }
     
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
@@ -56,6 +57,8 @@ final class MoviesSceneDIContainer {
     }
     
     // MARK: - Movie Details
+   
+
     func makeMoviesDetailsViewController(movie: Movie) -> UIViewController
     {
         return DetailViewController.create(with: makeMoviesDetailsViewModel(movie: movie) as! MovieDetailsViewModel)

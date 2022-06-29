@@ -11,20 +11,10 @@ public protocol ConnectionError: Error {
     var isInternetConnectionError: Bool { get }
 }
 
-public protocol ResultError: Error {
-    var zeroResultError : Bool { get }
-}
 
 public extension Error {
     var isInternetConnectionError: Bool {
         guard let error = self as? ConnectionError, error.isInternetConnectionError else {
-            return false
-        }
-        return true
-    }
-    var zeroResultError: Bool{
-        guard let error = self as? ResultError, error.zeroResultError else
-        {
             return false
         }
         return true

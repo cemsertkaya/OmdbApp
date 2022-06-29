@@ -30,11 +30,12 @@ extension DefaultMoviesRepository: MoviesRepository {
         let endpoint = APIEndpoints.getMovies(with: requestDTO)
         
         task.networkTask = self.dataTransferService.request(with: endpoint) { result in
-            switch result {
-            case .success(let moviePage):
-                completion(.success(moviePage))
-            case .failure(let error):
-                completion(.failure(error))
+            switch result
+            {
+                case .success(let moviePage):
+                    completion(.success(moviePage))
+                case .failure(let error):
+                    completion(.failure(error))
             }
         }
         

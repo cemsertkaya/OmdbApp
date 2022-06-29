@@ -10,16 +10,20 @@ import UIKit
 
 struct MoviesListItemViewModel : Equatable {
     
-    var name : String
-    var category : String
-    var insider : String
-    var image : UIImage
-    
+    let poster : String
+    let title : String
+    let type : MovieType
+    let year : String
+
+}
+
+extension MoviesListItemViewModel
+{
     init(with model: Movie)
     {
-        name = ""
-        category = ""
-        insider = ""
-        image = UIImage()
+        title = model.title!
+        poster = model.poster!
+        year = model.year!
+        type = model.type!
     }
 }

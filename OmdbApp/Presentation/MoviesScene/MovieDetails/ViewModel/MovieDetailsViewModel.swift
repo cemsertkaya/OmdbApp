@@ -33,7 +33,7 @@ final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
         self.title = movie.title ?? ""
         self.overview = ""
         self.posterImagePath =  ""
-        self.isPosterImageHidden = movie.posterPath == nil
+        self.isPosterImageHidden = movie.poster == nil
         
     }
 }

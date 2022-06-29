@@ -44,10 +44,8 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 
     private let searchMoviesUseCase: SearchMoviesUseCase
     private let actions: MoviesListViewModelActions?
-
-    private var pages: [MoviesPage] = []
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
-
+    private var pages: [MoviesPage] = []
     // MARK: - OUTPUT
 
     let items: Observable<[MoviesListItemViewModel]> = Observable([])
@@ -57,7 +55,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     var isEmpty: Bool { return items.value.isEmpty }
     let screenTitle = NSLocalizedString("Movies", comment: "")
     let emptyDataTitle = NSLocalizedString("Search results", comment: "")
-    let errorTitle = NSLocalizedString("Error", comment: "")
+    let errorTitle = NSLocalizedString("Oopps!", comment: "")
     let searchBarPlaceholder = NSLocalizedString("Search Movies", comment: "")
 
     // MARK: - Init
@@ -73,13 +71,23 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     
     private func appendPage(_ moviesPage: MoviesPage)
     {
-        items.value = pages.movies.map(MoviesListItemViewModel.init)
+        if moviesPage.movies != nil
+        {
+            items.value = [moviesPage].movies.map(MoviesListItemViewModel.init)
+        }
+        else
+        {
+            movieNotFoundError()
+        }
+        
     }
     
-    private func load(movieQuery: MovieQuery, loading: MoviesListViewModelLoading) {
+    private func load(movieQuery: MovieQuery, loading: MoviesListViewModelLoading)
+    {
         self.loading.value = loading
         query.value = movieQuery.query
-        print(query.value)
+        
+        if query.value.last == " " {query.value.removeLast()}
         
         moviesLoadTask = searchMoviesUseCase.execute(
             requestValue: .init(query: movieQuery, page: 0),
@@ -89,6 +97,8 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
                 {
                     case .success(let page):
                         self.appendPage(page)
+                        
+                        
                     case .failure(let error):
                         self.handle(error: error)
                 }
@@ -101,6 +111,13 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
         self.error.value = error.isInternetConnectionError ?
             NSLocalizedString("No internet connection", comment: "") :
             NSLocalizedString("Failed loading movies", comment: "")
+        
+    }
+    
+    private func movieNotFoundError()
+    {
+        self.error.value = NSLocalizedString("Movie Not Found", comment: "")
+        
     }
 
     private func update(movieQuery: MovieQuery) {
@@ -130,6 +147,6 @@ extension DefaultMoviesListViewModel
 
 private extension Array where Element == MoviesPage
 {
-    var movies: [Movie] { flatMap { $0.movies } }
+    var movies: [Movie] { flatMap { $0.movies ?? [Movie]() }  }
 }
 

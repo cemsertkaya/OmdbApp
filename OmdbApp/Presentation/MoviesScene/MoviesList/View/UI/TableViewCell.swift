@@ -11,8 +11,18 @@ class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var category: UILabel!
-    @IBOutlet weak var insider: UITextView!
+    @IBOutlet weak var year: UILabel!
     @IBOutlet weak var photo: UIImageView!
+
+    private var viewModel: MoviesListItemViewModel!
+    private var posterImagesRepository: PosterImagesRepository?
+    
+    private var imageLoadTask: Cancellable?
+    {
+        willSet { imageLoadTask?.cancel() }
+        
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,12 +34,41 @@ class TableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(_ vm : MoviesListItemViewModel)
+    func configure(_ vm : MoviesListItemViewModel, posterImagesRepository: PosterImagesRepository?)
     {
-        name.text = vm.name
-        category.text = vm.category
-        insider.text = vm.insider
-        photo.image = vm.image
+        self.viewModel = vm
+        self.posterImagesRepository = posterImagesRepository
+        self.name.text = vm.title
+        self.category.text = vm.type.rawValue.capitalizingFirstLetter()
+        self.year.text = vm.year
+        updatePosterImage(width: Int(self.photo.imageSizeAfterAspectFit.scaledSize.width))
+    }
+    
+    func updatePosterImage(width: Int)
+    {
+        let posterImagePath = viewModel.poster
+       
+        let posterImagePathSpliter = posterImagePath.components(separatedBy: CharacterSet(charactersIn: "/"))
+        
+        imageLoadTask = posterImagesRepository?.fetchImage(with: posterImagePathSpliter[5], width: width) { [weak self] result in
+            print(result)
+            guard let self = self else { return }
+            guard self.viewModel.poster == posterImagePath else { return }
+            if case let .success(data) = result {
+                self.photo.image = UIImage(data: data)
+            }
+            self.imageLoadTask = nil
+        }
     }
 
+}
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+      return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+      self = self.capitalizingFirstLetter()
+    }
 }
