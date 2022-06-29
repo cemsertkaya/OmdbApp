@@ -13,7 +13,8 @@ protocol MovieDetailsViewModelOutput {
     var title: String { get }
     var posterImage: Observable<Data?> { get }
     var isPosterImageHidden: Bool { get }
-    var overview: String { get }
+    var year: String { get }
+    var type : MovieType { get }
 }
 
 protocol MovieDetailsViewModel: MovieDetailsViewModelInput, MovieDetailsViewModelOutput { }
@@ -21,20 +22,25 @@ protocol MovieDetailsViewModel: MovieDetailsViewModelInput, MovieDetailsViewMode
 final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
     
     private let posterImagePath: String?
+    private let posterImagesRepository: PosterImagesRepository
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
 
     // MARK: - OUTPUT
     let title: String
     let posterImage: Observable<Data?> = Observable(nil)
     let isPosterImageHidden: Bool
-    let overview: String
+    let year: String
+    let type : MovieType
     
-    init(movie: Movie) {
+    
+    init(movie: Movie,posterImagesRepository: PosterImagesRepository)
+    {
         self.title = movie.title ?? ""
-        self.overview = ""
-        self.posterImagePath =  ""
+        self.year = movie.year ?? ""
+        self.type = movie.type!
+        self.posterImagePath =  movie.poster
         self.isPosterImageHidden = movie.poster == nil
-        
+        self.posterImagesRepository = posterImagesRepository
     }
 }
 
@@ -43,10 +49,13 @@ extension DefaultMovieDetailsViewModel {
     
     
     func updatePosterImage(width: Int) {
-        /*
-        guard let posterImagePath = posterImagePath else { return }
+        
 
-        imageLoadTask = posterImagesRepository.fetchImage(with: posterImagePath, width: width) { result in
+        let posterImagePath = posterImagePath
+       
+        let posterImagePathSpliter = posterImagePath!.components(separatedBy: CharacterSet(charactersIn: "/"))
+        
+        imageLoadTask = posterImagesRepository.fetchImage(with: posterImagePathSpliter[5], width: width) { result in
             guard self.posterImagePath == posterImagePath else { return }
             switch result {
             case .success(let data):
@@ -55,6 +64,6 @@ extension DefaultMovieDetailsViewModel {
             }
             self.imageLoadTask = nil
         }
-         */
+         
     }
 }

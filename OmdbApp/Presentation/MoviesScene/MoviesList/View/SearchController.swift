@@ -53,7 +53,8 @@ class SearchController: UIViewController, Alertable, UITextFieldDelegate, Storyb
     
     
     @IBAction func searchButton(_ sender: Any)
-    {        viewModel.didSearch(query: searchTextField.text!)
+    {
+        viewModel.didSearch(query: searchTextField.text!)
         view.endEditing(true)
     }
 }
@@ -76,7 +77,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        print("selected")
+        viewModel.didSelectItem(at: indexPath.row)
         
         
     }

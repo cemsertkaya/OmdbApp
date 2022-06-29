@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Sinema-->
+        <!--Omdb Movies-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SearchController" customModule="OmdbApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -161,7 +161,7 @@
                             <constraint firstItem="gnu-bx-0JT" firstAttribute="centerX" secondItem="oe4-MC-blA" secondAttribute="centerX" id="qkl-CY-pPM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Sinema" id="G2x-Jt-q0Q"/>
+                    <navigationItem key="navigationItem" title="Omdb Movies" id="G2x-Jt-q0Q"/>
                     <connections>
                         <outlet property="activityIndicator" destination="oe4-MC-blA" id="Gqf-vy-qug"/>
                         <outlet property="searchTextField" destination="kyE-WE-0ZE" id="xpS-Qg-YuC"/>

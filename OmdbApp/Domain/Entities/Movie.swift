@@ -37,6 +37,15 @@ struct Movie : Decodable {
        case poster = "Poster"
        case imdbID
      }
+    
+    init(_ vm : MoviesListItemViewModel)
+    {
+        title = vm.title
+        year = vm.year
+        type = vm.type
+        poster = vm.poster
+        imdbID = vm.year
+    }
 }
 
 enum MovieType : String, Decodable {

@@ -14,6 +14,7 @@ struct MoviesListItemViewModel : Equatable {
     let title : String
     let type : MovieType
     let year : String
+    
 
 }
 

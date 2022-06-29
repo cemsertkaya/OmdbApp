@@ -45,7 +45,7 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
     private let searchMoviesUseCase: SearchMoviesUseCase
     private let actions: MoviesListViewModelActions?
     private var moviesLoadTask: Cancellable? { willSet { moviesLoadTask?.cancel() } }
-    private var pages: [MoviesPage] = []
+   
     // MARK: - OUTPUT
 
     let items: Observable<[MoviesListItemViewModel]> = Observable([])
@@ -140,7 +140,7 @@ extension DefaultMoviesListViewModel
 
     func didCancelSearch() {moviesLoadTask?.cancel()}
 
-    func didSelectItem(at index: Int) {actions?.showMovieDetails(pages.movies[index])}
+    func didSelectItem(at index: Int) {actions?.showMovieDetails(Movie(items.value[index]))}
 }
 
 // MARK: - Private

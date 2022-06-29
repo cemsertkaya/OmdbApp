@@ -66,7 +66,7 @@ final class MoviesSceneDIContainer {
     
     func makeMoviesDetailsViewModel(movie: Movie) -> MovieDetailsViewModel
     {
-        return DefaultMovieDetailsViewModel(movie: movie)
+        return DefaultMovieDetailsViewModel(movie: movie, posterImagesRepository: makePosterImagesRepository())
     }
     
    
