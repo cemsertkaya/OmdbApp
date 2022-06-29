@@ -21,7 +21,6 @@ class DetailViewController: UIViewController, StoryboardInstantiable {
         super.viewDidLoad()
         bind(to: viewModel)
         setupViews()
-        
     }
     
     static func create(with viewModel: MovieDetailsViewModel) -> DetailViewController
@@ -31,16 +30,19 @@ class DetailViewController: UIViewController, StoryboardInstantiable {
         return view
     }
     
-    private func bind(to viewModel: MovieDetailsViewModel) {
+    private func bind(to viewModel: MovieDetailsViewModel)
+    {
         viewModel.posterImage.observe(on: self) { [weak self] in self?.photoView.image = $0.flatMap(UIImage.init) }
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewDidLayoutSubviews()
+    {
         super.viewDidLayoutSubviews()
         viewModel.updatePosterImage(width: Int(photoView.imageSizeAfterAspectFit.scaledSize.width))
     }
 
-    private func setupViews() {
+    private func setupViews()
+    {
         name.text = viewModel.title
         category.text = viewModel.type.rawValue.capitalizingFirstLetter()
         year.text = viewModel.year

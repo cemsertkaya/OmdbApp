@@ -17,22 +17,8 @@ class TableViewCell: UITableViewCell {
     private var viewModel: MoviesListItemViewModel!
     private var posterImagesRepository: PosterImagesRepository?
     
-    private var imageLoadTask: Cancellable?
-    {
-        willSet { imageLoadTask?.cancel() }
-        
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    private var imageLoadTask: Cancellable? {willSet { imageLoadTask?.cancel() }}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
     func configure(_ vm : MoviesListItemViewModel, posterImagesRepository: PosterImagesRepository?)
     {
@@ -42,6 +28,7 @@ class TableViewCell: UITableViewCell {
         self.category.text = vm.type.rawValue.capitalizingFirstLetter()
         self.year.text = vm.year
         updatePosterImage(width: Int(self.photo.imageSizeAfterAspectFit.scaledSize.width))
+        self.selectionStyle = .none
     }
     
     func updatePosterImage(width: Int)
@@ -63,12 +50,9 @@ class TableViewCell: UITableViewCell {
 
 }
 
-extension String {
-    func capitalizingFirstLetter() -> String {
-      return prefix(1).uppercased() + self.lowercased().dropFirst()
-    }
+extension String
+{
+    func capitalizingFirstLetter() -> String {return prefix(1).uppercased() + self.lowercased().dropFirst()}
 
-    mutating func capitalizeFirstLetter() {
-      self = self.capitalizingFirstLetter()
-    }
+    mutating func capitalizeFirstLetter() {self = self.capitalizingFirstLetter()}
 }

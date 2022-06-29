@@ -41,6 +41,7 @@ class SearchController: UIViewController, Alertable, UITextFieldDelegate, Storyb
     private func bind(to viewModel : MoviesListViewModel){
         viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems() }
         viewModel.error.observe(on: self) { [weak self] in self?.showError($0) }
+        viewModel.loading.observe(on: self) { [weak self]  in self?.updateLoading($0)}
     }
     
     private func updateItems() {self.tableView.reloadData()}
@@ -56,6 +57,16 @@ class SearchController: UIViewController, Alertable, UITextFieldDelegate, Storyb
     {
         viewModel.didSearch(query: searchTextField.text!)
         view.endEditing(true)
+    }
+    
+    private func updateLoading(_ loading: MoviesListViewModelLoading?)
+    {
+        switch loading
+        {
+            case .fullScreen: activityIndicator.isHidden = false
+            case .nextPage: activityIndicator.isHidden = false
+            case .none: activityIndicator.isHidden = true
+        }
     }
 }
 
