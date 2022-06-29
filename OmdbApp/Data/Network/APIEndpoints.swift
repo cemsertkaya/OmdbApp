@@ -9,7 +9,7 @@ import Foundation
 
 struct APIEndpoints {
     
-    static func getMovies(with moviesRequestDTO: MoviesRequestDTO) -> Endpoint<MoviesResponseDTO> {
+    static func getMovies(with moviesRequestDTO: MoviesRequestDTO) -> Endpoint<MoviesPage> {
 
         return Endpoint(path: "",
                         method: .get,

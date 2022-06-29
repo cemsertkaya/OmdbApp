@@ -21,9 +21,8 @@ final class DefaultMoviesRepository {
 
 extension DefaultMoviesRepository: MoviesRepository {
 
-    public func fetchMoviesList(query: MovieQuery, page: Int,
-                                cached: @escaping (MoviesPage) -> Void,
-                                completion: @escaping (Result<MoviesPage, Error>) -> Void) -> Cancellable? {
+    public func fetchMoviesList(query: MovieQuery, page: Int,cached: @escaping (MoviesPage) -> Void,completion: @escaping (Result<MoviesPage, Error>) -> Void) -> Cancellable?
+    {
 
         let requestDTO = MoviesRequestDTO(s: query.query, plot: "full")
         let task = RepositoryTask()
@@ -32,8 +31,8 @@ extension DefaultMoviesRepository: MoviesRepository {
         
         task.networkTask = self.dataTransferService.request(with: endpoint) { result in
             switch result {
-            case .success(let responseDTO):
-                completion(.success(responseDTO.toDomain()))
+            case .success(let moviePage):
+                completion(.success(moviePage))
             case .failure(let error):
                 completion(.failure(error))
             }
