@@ -36,19 +36,25 @@ class TableViewCell: UITableViewCell {
     private func updatePosterImage(width: Int)
     {
         photo.image = nil
-        let posterImagePath = viewModel.poster
-       
-        let posterImagePathSpliter = posterImagePath.components(separatedBy: CharacterSet(charactersIn: "/"))
         
-        imageLoadTask = posterImagesRepository?.fetchImage(with: posterImagePathSpliter[5], width: width) { [weak self] result in
-            print(result)
-            guard let self = self else { return }
-            guard self.viewModel.poster == posterImagePath else { return }
-            if case let .success(data) = result {
-                self.photo.image = UIImage(data: data)
+        let posterImagePath = viewModel.poster
+        
+        if posterImagePath != "N/A"
+        {
+            let posterImagePathSpliter = posterImagePath.components(separatedBy: CharacterSet(charactersIn: "/"))
+            
+            imageLoadTask = posterImagesRepository?.fetchImage(with: posterImagePathSpliter[5], width: width) { [weak self] result in
+                print(result)
+                guard let self = self else { return }
+                guard self.viewModel.poster == posterImagePath else { return }
+                if case let .success(data) = result {
+                    self.photo.image = UIImage(data: data)
+                }
+                self.imageLoadTask = nil
             }
-            self.imageLoadTask = nil
         }
+       
+       
     }
 
 }

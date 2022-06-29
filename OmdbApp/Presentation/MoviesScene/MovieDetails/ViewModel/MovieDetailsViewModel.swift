@@ -52,18 +52,20 @@ extension DefaultMovieDetailsViewModel {
         
 
         let posterImagePath = posterImagePath
-       
-        let posterImagePathSpliter = posterImagePath!.components(separatedBy: CharacterSet(charactersIn: "/"))
         
-        imageLoadTask = posterImagesRepository.fetchImage(with: posterImagePathSpliter[5], width: width) { result in
-            guard self.posterImagePath == posterImagePath else { return }
-            switch result {
-            case .success(let data):
-                self.posterImage.value = data
-            case .failure: break
+        if posterImagePath != "N/A"
+        {
+            let posterImagePathSpliter = posterImagePath!.components(separatedBy: CharacterSet(charactersIn: "/"))
+            
+            imageLoadTask = posterImagesRepository.fetchImage(with: posterImagePathSpliter[5], width: width) { result in
+                guard self.posterImagePath == posterImagePath else { return }
+                switch result {
+                case .success(let data):
+                    self.posterImage.value = data
+                case .failure: break
+                }
+                self.imageLoadTask = nil
             }
-            self.imageLoadTask = nil
         }
-         
     }
 }
