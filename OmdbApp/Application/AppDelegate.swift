@@ -29,8 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        CoreDataStorage.shared.saveContext()
-    }
+   
 }
 

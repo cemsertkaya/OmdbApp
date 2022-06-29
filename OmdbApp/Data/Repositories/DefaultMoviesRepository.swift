@@ -11,11 +11,11 @@ import Foundation
 final class DefaultMoviesRepository {
 
     private let dataTransferService: DataTransferService
-    private let cache: MoviesResponseStorage
 
-    init(dataTransferService: DataTransferService, cache: MoviesResponseStorage) {
+
+    init(dataTransferService: DataTransferService)
+    {
         self.dataTransferService = dataTransferService
-        self.cache = cache
     }
 }
 
@@ -28,6 +28,7 @@ extension DefaultMoviesRepository: MoviesRepository {
         let requestDTO = MoviesRequestDTO(s: query.query, plot: "full")
         let task = RepositoryTask()
 
+        /*
         cache.getResponse(for: requestDTO) { result in
 
             if case let .success(responseDTO?) = result {
@@ -46,6 +47,8 @@ extension DefaultMoviesRepository: MoviesRepository {
                 }
             }
         }
+        */
+        
         return task
     }
 }
