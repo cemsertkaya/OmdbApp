@@ -16,23 +16,26 @@ class TableViewCell: UITableViewCell {
 
     private var viewModel: MoviesListItemViewModel!
     private var posterImagesRepository: PosterImagesRepository?
-    
-    private var imageLoadTask: Cancellable? {willSet { imageLoadTask?.cancel() }}
+    private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
 
     
-    func configure(_ vm : MoviesListItemViewModel, posterImagesRepository: PosterImagesRepository?)
+    func configure(with vm : MoviesListItemViewModel, posterImagesRepository: PosterImagesRepository?)
     {
         self.viewModel = vm
         self.posterImagesRepository = posterImagesRepository
+        
         self.name.text = vm.title
         self.category.text = vm.type.rawValue.capitalizingFirstLetter()
         self.year.text = vm.year
-        updatePosterImage(width: Int(self.photo.imageSizeAfterAspectFit.scaledSize.width))
         self.selectionStyle = .none
+        
+        updatePosterImage(width: Int(self.photo.imageSizeAfterAspectFit.scaledSize.width))
+        
     }
     
-    func updatePosterImage(width: Int)
+    private func updatePosterImage(width: Int)
     {
+        photo.image = nil
         let posterImagePath = viewModel.poster
        
         let posterImagePathSpliter = posterImagePath.components(separatedBy: CharacterSet(charactersIn: "/"))

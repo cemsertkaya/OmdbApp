@@ -16,13 +16,13 @@ class SearchController: UIViewController, Alertable, UITextFieldDelegate, Storyb
     private var viewModel : MoviesListViewModel!
     private var posterImagesRepository: PosterImagesRepository?
     
-    
     // MARK: - Lifecycle
     
     static func create(with viewModel: MoviesListViewModel,posterImagesRepository: PosterImagesRepository?) -> SearchController
     {
         let view = SearchController.instantiateViewController()
         view.viewModel = viewModel
+        view.posterImagesRepository = posterImagesRepository
         return view
     }
     
@@ -46,12 +46,11 @@ class SearchController: UIViewController, Alertable, UITextFieldDelegate, Storyb
     
     private func updateItems() {self.tableView.reloadData()}
     
-    private func showError(_ error: String) {
+    private func showError(_ error: String)
+    {
         guard !error.isEmpty else { return }
         showAlert(title: viewModel.errorTitle, message: error)
     }
-    
-    
     
     @IBAction func searchButton(_ sender: Any)
     {
@@ -82,14 +81,10 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource
             assertionFailure("Cannot dequeue reusable cell \(TableViewCell.self) with reuseIdentifier: tableViewCell")
             return UITableViewCell()
         }
-        cell.configure(viewModel.items.value[indexPath.row], posterImagesRepository: posterImagesRepository)
+        cell.configure(with: viewModel.items.value[indexPath.row], posterImagesRepository: posterImagesRepository)
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        viewModel.didSelectItem(at: indexPath.row)
-        
-        
-    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {viewModel.didSelectItem(at: indexPath.row)}
 }
