@@ -7,23 +7,23 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, StoryboardInstantiable {
 
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var insider: UITextView!
-    var viewModel : MoviesListItemViewModel!
+    var viewModel : MovieDetailsViewModel!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        configure(viewModel)
+        
     }
     
-    func configure(_ vm : MoviesListItemViewModel)
+    static func create(with viewModel: MovieDetailsViewModel) -> DetailViewController
     {
-        category.text = viewModel.category
-        photoView.image = viewModel.image
-        insider.text = viewModel.insider
+        let view = DetailViewController.instantiateViewController()
+        view.viewModel = viewModel
+        return view
     }
 }

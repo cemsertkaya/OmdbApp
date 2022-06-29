@@ -1,9 +1,10 @@
 //
 //  DefaultMoviesRepository.swift
-//  OmdbApp
+//  ExampleMVVM
 //
-//  Created by Cem Sertkaya on 28.06.2022.
+//  Created by Oleh Kudinov on 01.10.18.
 //
+// **Note**: DTOs structs are mapped into Domains here, and Repository protocols does not contain DTOs
 
 import Foundation
 
@@ -24,7 +25,7 @@ extension DefaultMoviesRepository: MoviesRepository {
                                 cached: @escaping (MoviesPage) -> Void,
                                 completion: @escaping (Result<MoviesPage, Error>) -> Void) -> Cancellable? {
 
-        let requestDTO = MoviesRequestDTO(query: query.query, page: page)
+        let requestDTO = MoviesRequestDTO(s: query.query, plot: "full")
         let task = RepositoryTask()
 
         cache.getResponse(for: requestDTO) { result in

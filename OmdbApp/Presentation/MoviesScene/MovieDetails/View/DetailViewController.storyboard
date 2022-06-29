@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7cy-N3-mpE">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detail View Controller-->
+        <scene sceneID="qV4-XY-Zgl">
+            <objects>
+                <viewController id="7cy-N3-mpE" customClass="DetailViewController" customModule="OmdbApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SEa-Uh-Gv3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xdj-Zp-iRH">
+                                <rect key="frame" x="67" y="13" width="240" height="190"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="190" id="wBt-fa-bW6"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7Q-ZJ-KdW">
+                                <rect key="frame" x="16" y="248" width="343" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="ctm-0I-6Ua"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gNL-bF-EuT">
+                                <rect key="frame" x="16" y="309" width="343" height="172"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yEr-Ie-McR"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yEr-Ie-McR" firstAttribute="trailing" secondItem="gNL-bF-EuT" secondAttribute="trailing" constant="16" id="2Gj-su-Io1"/>
+                            <constraint firstItem="T7Q-ZJ-KdW" firstAttribute="leading" secondItem="gNL-bF-EuT" secondAttribute="leading" id="6lu-ZQ-NlP"/>
+                            <constraint firstItem="gNL-bF-EuT" firstAttribute="leading" secondItem="yEr-Ie-McR" secondAttribute="leading" constant="16" id="DCN-oU-dT1"/>
+                            <constraint firstItem="gNL-bF-EuT" firstAttribute="top" secondItem="T7Q-ZJ-KdW" secondAttribute="bottom" constant="30" id="JUL-g1-re4"/>
+                            <constraint firstItem="T7Q-ZJ-KdW" firstAttribute="trailing" secondItem="gNL-bF-EuT" secondAttribute="trailing" id="OHb-hS-3gW"/>
+                            <constraint firstItem="T7Q-ZJ-KdW" firstAttribute="top" secondItem="xdj-Zp-iRH" secondAttribute="bottom" constant="45" id="Voe-d0-dQd"/>
+                            <constraint firstItem="yEr-Ie-McR" firstAttribute="bottom" secondItem="gNL-bF-EuT" secondAttribute="bottom" constant="186" id="WFc-Na-8Z7"/>
+                            <constraint firstItem="xdj-Zp-iRH" firstAttribute="top" secondItem="yEr-Ie-McR" secondAttribute="top" constant="13" id="i3l-56-0SF"/>
+                            <constraint firstItem="yEr-Ie-McR" firstAttribute="trailing" secondItem="xdj-Zp-iRH" secondAttribute="trailing" constant="68" id="wY3-Ub-FVj"/>
+                            <constraint firstItem="xdj-Zp-iRH" firstAttribute="leading" secondItem="yEr-Ie-McR" secondAttribute="leading" constant="67" id="yKe-nr-6mS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="iFW-BQ-Z3H"/>
+                    <connections>
+                        <outlet property="category" destination="T7Q-ZJ-KdW" id="5wy-qJ-bLB"/>
+                        <outlet property="insider" destination="gNL-bF-EuT" id="Y6G-sv-SS5"/>
+                        <outlet property="photoView" destination="xdj-Zp-iRH" id="An9-BA-BsT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W18-NX-rfn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1919" y="83"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

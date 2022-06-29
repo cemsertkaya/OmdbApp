@@ -7,43 +7,44 @@
 
 import UIKit
 
-class SearchController: UIViewController, Alertable
+class SearchController: UIViewController, Alertable, UITextFieldDelegate, StoryboardInstantiable
 {
     @IBOutlet weak var searchTextField: FormTextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
-    
     private var viewModel : MoviesListViewModel!
    
+    static func create(with viewModel: MoviesListViewModel) -> SearchController
+    {
+        let view = SearchController.instantiateViewController()
+        view.viewModel = viewModel
+        return view
+    }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        UITextView.appearance().backgroundColor = UIColor.white;
+        UITableView.appearance().backgroundColor = UIColor.white;
+        searchTextField.delegate = self
+        tableView.estimatedRowHeight = 149
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    
-    @IBAction func searchButton(_ sender: Any)
-    {
-
+    private func bind(to viewModel : MoviesListViewModel){
+        viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems() }
+        viewModel.error.observe(on: self) { [weak self] in self?.showError($0) }
     }
     
-    private func bind(to viewModel: MoviesListViewModel)
-    {
-        
+    private func updateItems() {self.tableView.reloadData()}
+    
+    private func showError(_ error: String) {
+        guard !error.isEmpty else { return }
+        showAlert(title: viewModel.errorTitle, message: error)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        /*
-        if segue.identifier == String(describing: DetailViewController.self),
-        let destinationVC = segue.destination as? DetailViewController
-        {
-            //destinationVC.viewModel = viewModel
-        }*/
-    }
-    
+    @IBAction func searchButton(_ sender: Any) {viewModel.didSearch(query: searchTextField.text!)}
 }
 
 extension SearchController: UITableViewDelegate, UITableViewDataSource
@@ -58,9 +59,14 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource
             assertionFailure("Cannot dequeue reusable cell \(TableViewCell.self) with reuseIdentifier: tableViewCell")
             return UITableViewCell()
         }
-        //cell.configure(viewModel.modelAt(indexPath.row, tableView: tableView))
+        cell.configure(viewModel.items.value[indexPath.row])
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {viewModel.didSelectItem(at: indexPath.row)}
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        print("selected")
+        
+        
+    }
 }

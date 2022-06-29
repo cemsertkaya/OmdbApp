@@ -70,25 +70,34 @@ final class DefaultMoviesListViewModel: MoviesListViewModel {
 
     // MARK: - Private
 
+    
+    private func appendPage(_ moviesPage: MoviesPage)
+    {
+        items.value = pages.movies.map(MoviesListItemViewModel.init)
+    }
+    
     private func load(movieQuery: MovieQuery, loading: MoviesListViewModelLoading) {
         self.loading.value = loading
         query.value = movieQuery.query
-
-        /*moviesLoadTask = searchMoviesUseCase.execute(
-            requestValue: .init(query: movieQuery, page: nextPage),
-            cached: appendPage,
+        print(query.value)
+        
+        moviesLoadTask = searchMoviesUseCase.execute(
+            requestValue: .init(query: movieQuery, page: 0),
+            cached: appendPage(_:),
             completion: { result in
-                switch result {
-                case .success(let page):
-                    self.appendPage(page)
-                case .failure(let error):
-                    self.handle(error: error)
+                switch result
+                {
+                    case .success(let page):
+                        self.appendPage(page)
+                    case .failure(let error):
+                        self.handle(error: error)
                 }
                 self.loading.value = .none
-        })*/
+        })
     }
 
-    private func handle(error: Error) {
+    private func handle(error: Error)
+    {
         self.error.value = error.isInternetConnectionError ?
             NSLocalizedString("No internet connection", comment: "") :
             NSLocalizedString("Failed loading movies", comment: "")

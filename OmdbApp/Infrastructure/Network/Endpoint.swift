@@ -1,8 +1,8 @@
 //
 //  Endpoint.swift
-//  OmdbApp
+//  ExampleMVVM
 //
-//  Created by Cem Sertkaya on 28.06.2022.
+//  Created by Oleh Kudinov on 01.10.18.
 //
 
 import Foundation
@@ -146,4 +146,3 @@ private extension Encodable {
         return jsonData as? [String : Any]
     }
 }
-

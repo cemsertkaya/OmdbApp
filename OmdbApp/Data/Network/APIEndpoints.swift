@@ -1,18 +1,17 @@
 //
 //  APIEndpoints.swift
-//  OmdbApp
+//  ExampleMVVM
 //
-//  Created by Cem Sertkaya on 28.06.2022.
+//  Created by Oleh Kudinov on 01.10.18.
 //
 
 import Foundation
 
 struct APIEndpoints {
     
-    static func getMovies(with moviesRequestDTO: MoviesRequestDTO) -> Endpoint<MoviesPage>
-    {
+    static func getMovies(with moviesRequestDTO: MoviesRequestDTO) -> Endpoint<MoviesResponseDTO> {
 
-        return Endpoint(path: "3/search/movie/",
+        return Endpoint(path: "",
                         method: .get,
                         queryParametersEncodable: moviesRequestDTO)
     }

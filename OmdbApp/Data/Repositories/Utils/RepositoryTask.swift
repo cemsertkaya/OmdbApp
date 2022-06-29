@@ -1,8 +1,8 @@
 //
 //  RepositoryTask.swift
-//  OmdbApp
+//  ExampleMVVM
 //
-//  Created by Cem Sertkaya on 28.06.2022.
+//  Created by Oleh Kudinov on 25.10.19.
 //
 
 import Foundation

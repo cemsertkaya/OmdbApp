@@ -1,8 +1,8 @@
 //
-//  DataTransferService.swift
-//  OmdbApp
+//  DataTransfer.swift
+//  ExampleMVVM
 //
-//  Created by Cem Sertkaya on 28.06.2022.
+//  Created by Oleh Kudinov on 01.10.18.
 //
 
 import Foundation
@@ -13,7 +13,6 @@ public enum DataTransferError: Error {
     case networkFailure(NetworkError)
     case resolvedNetworkFailure(Error)
 }
-
 
 public protocol DataTransferService {
     typealias CompletionHandler<T> = (Result<T, DataTransferError>) -> Void

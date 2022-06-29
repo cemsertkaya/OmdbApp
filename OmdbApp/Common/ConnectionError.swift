@@ -1,16 +1,14 @@
 //
 //  ConnectionError.swift
-//  OmdbApp
+//  ExampleMVVM
 //
-//  Created by Cem Sertkaya on 28.06.2022.
+//  Created by Oleh Kudinov on 01.10.19.
 //
 
 import Foundation
 
 public protocol ConnectionError: Error {
-    
-    var isInternetConnectionError : Bool {get}
-    
+    var isInternetConnectionError: Bool { get }
 }
 
 public extension Error {
